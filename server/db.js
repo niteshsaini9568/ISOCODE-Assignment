@@ -1,7 +1,9 @@
-import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
 import path from 'node:path';
 export function openDb(directory) {
+  const sqlite=process.getBuiltinModule('node:sqlite');
+  if(!sqlite?.DatabaseSync)throw new Error('Local SQLite requires a Node.js build with SQLite support. Configure PostgreSQL for hosted operation.');
+  const { DatabaseSync }=sqlite;
   mkdirSync(directory, { recursive: true });
   const db = new DatabaseSync(path.join(directory, 'shortlist.sqlite'));
   db.exec('CREATE TABLE IF NOT EXISTS ai_credentials(workspace_id TEXT NOT NULL,provider TEXT NOT NULL,secret TEXT NOT NULL,PRIMARY KEY(workspace_id,provider))');
