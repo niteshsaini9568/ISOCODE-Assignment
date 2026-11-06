@@ -1,0 +1,4 @@
+/** @type {import('next').NextConfig} */
+import { withWorkflow } from 'workflow/next';
+const config={poweredByHeader:false,devIndicators:false,serverExternalPackages:['pg','pdf-parse','mammoth'],async headers(){return [{source:'/:path*',headers:[{key:'X-Content-Type-Options',value:'nosniff'},{key:'Referrer-Policy',value:'strict-origin-when-cross-origin'},{key:'Permissions-Policy',value:'camera=(), microphone=(), geolocation=()'},...(process.env.NODE_ENV==='production'?[{key:'Content-Security-Policy',value:"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://*.blob.vercel-storage.com https://blob.vercel-storage.com; object-src 'none'; frame-ancestors 'self'; base-uri 'self'"}]:[])]}];}};
+export default withWorkflow(config);

@@ -1,0 +1,108 @@
+{
+  "date": "2026-11-06",
+  "testCommand": "TEST_DATABASE_URL configured; node --test --test-concurrency=1 tests/*.test.js",
+  "tests": 60,
+  "passed": 60,
+  "failed": 0,
+  "skipped": 0,
+  "buildCommand": "npm run build",
+  "productionBuild": "passed",
+  "dependencyAudit": {
+    "command": "npm audit --omit=dev",
+    "knownVulnerabilities": 0
+  },
+  "bulkFixtures": {
+    "distinctMixedFormatCVs": 500,
+    "duplicateBatchCVs": 500
+  },
+  "liveGoogleOAuthVerified": false,
+  "liveAIProvidersVerified": false,
+  "messages": "mocked",
+  "productionSmokeChecks": "passed",
+  "browserWorkflow": "Not rerun during Vercel migration; native production HTTP checks passed",
+  "finalAppUrl": "http://127.0.0.1:5173/",
+  "mosaicFrontend": {
+    "source": "user-supplied 21st.dev archive",
+    "backendTests": {
+      "passed": 40,
+      "failed": 0
+    },
+    "browserChecks": [
+      "1920px desktop home and workflow",
+      "320px and 390px layout",
+      "native GET search",
+      "keyboard focus",
+      "recruiter and client sign-in",
+      "ranking evidence drawer",
+      "mobile navigation focus and Escape"
+    ],
+    "noNewPackages": true,
+    "reducedMotionAndContextLoss": "source inspected; not browser emulated"
+  },
+  "shadcnstoreFrontend": {
+    "sourceCommit": "866423741fa4b62d5e9427603cb2174aedf00f80",
+    "cliInstallation": "Template not found; public MIT source adapted",
+    "newChartTest": "passed",
+    "liveGoogleOAuthVerified": false,
+    "liveAIProvidersVerified": false,
+    "browserChecks": "passed: home, auth, recruiter/client dashboards, chart navigation, masked client portal, mobile drawer and narrow layout",
+    "runtimeChecks": "passed: public pages, font, health, signed-out redirect"
+  },
+  "neutralMosaicRestoration": {
+    "productionBuild": "passed",
+    "glyphAndShaderSelfCheck": "passed",
+    "browserAnimationFramesDiffer": true,
+    "narrowHomeOverflow": false,
+    "dashboardCanvasCount": 0,
+    "dashboardCardCount": 6,
+    "backendTestsRerun": false
+  },
+  "backendAudit": {
+    "report": "docs/backend-test-report.md",
+    "coverage": {
+      "lines": 98.82,
+      "branches": 88.73,
+      "functions": 94.54
+    },
+    "productionHttpAssertions": 18,
+    "productionBuildRerun": false,
+    "liveGoogleOAuthVerified": false,
+    "liveAIProvidersVerified": false,
+    "liveOcrVerified": false,
+    "fixedRegressions": 4,
+    "dependencyVulnerabilities": 0
+  },
+  "providerSetup": {
+    "report": "docs/provider-setup.md",
+    "productionBuild": "passed",
+    "productionHttpSmoke": "passed",
+    "browser": {
+      "recruiterLoginToSetup": "passed",
+      "providerDefaultChanges": "passed",
+      "requiredKeyState": "passed",
+      "passwordField": "passed",
+      "narrow390pxNoOverflow": true
+    },
+    "encryptedWorkspaceKeys": true,
+    "liveProviderKeysVerified": false
+  },
+  "vercelMigration": {
+    "implemented": true,
+    "hostedDeploymentPerformed": false,
+    "report": "docs/vercel-verification.md",
+    "deploymentGuide": "docs/vercel-deployment.md",
+    "database": "PostgreSQL; direct connection",
+    "privateFiles": "Vercel Blob",
+    "jobs": "Vercel Workflows",
+    "realPostgresIntegration": true,
+    "mixedBulkCVs": 500,
+    "runtimeChecks": 18,
+    "compiledLocalWorkflow": "completed",
+    "liveBlobVerified": false,
+    "liveOAuthVerified": false,
+    "liveAiVerified": false,
+    "liveMailVerified": false,
+    "dependencyVulnerabilities": 0,
+    "coverageRerun": false
+  }
+}

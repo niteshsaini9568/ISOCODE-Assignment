@@ -1,0 +1,20 @@
+{
+  "sourceArchive": "21stdev-my-components-one-vercel-app.zip",
+  "sourceModule": "mosaic-prompt-template-DNsBrfoh.js",
+  "sourceSha256": "da86341f38a6757e1e98eb8c3c0b96e2e49f916078e899be935aa9a613da3058",
+  "adaptedResources": [
+    "pixel glyph definitions",
+    "mosaic/prism/wave fragment shader",
+    "ice palette",
+    "glass surfaces and section composition"
+  ],
+  "implementation": [
+    "src/components/mosaic-reference.js",
+    "src/components/PixelText.jsx",
+    "src/components/MosaicBackground.jsx",
+    "src/home-mosaic.css"
+  ],
+  "thirdPartyScriptsExecuted": false,
+  "addedDependencies": [],
+  "currentAdaptation": "Original public layout restored; homepage shader uses muted blue/teal/violet while auth remains neutral. Scoped CSS preserves the ShadcnStore dashboard."
+}

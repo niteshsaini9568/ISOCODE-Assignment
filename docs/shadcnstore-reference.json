@@ -1,0 +1,21 @@
+{
+  "repository": "https://github.com/shadcnstore/shadcn-dashboard-landing-template",
+  "commit": "866423741fa4b62d5e9427603cb2174aedf00f80",
+  "license": "MIT; docs/licenses/ShadcnStore-MIT.txt",
+  "cliAttempt": "npx @21st-dev/cli@latest template add shadcn-dashboard-landing data/template-reference",
+  "cliResult": "Template not found; matching public source imported directly",
+  "adaptedFiles": [
+    "nextjs-version/src/app/globals.css",
+    "nextjs-version/src/components/ui/card.tsx",
+    "nextjs-version/src/app/(dashboard)/dashboard-2/page.tsx",
+    "nextjs-version/src/app/(dashboard)/dashboard-2/components/metrics-overview.tsx",
+    "nextjs-version/src/app/(dashboard)/dashboard-2/components/revenue-breakdown.tsx"
+  ],
+  "font": {
+    "name": "Inter Variable",
+    "source": "https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/InterVariable.woff2",
+    "sha256": "693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3",
+    "license": "docs/licenses/Inter-OFL.txt"
+  },
+  "newDependencies": []
+}

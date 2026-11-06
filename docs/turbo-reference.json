@@ -1,0 +1,19 @@
+{
+  "source": "TurboStarter Demo - launch your SaaS faster with a full-stack starter kit \uff5c TurboStarter (11_5_2026 6\uff1a48\uff1a32 PM).html",
+  "capturedUrl": "https://demo.turbostarter.dev/",
+  "font": {
+    "family": "Geist",
+    "weight": "100 900",
+    "file": "public/fonts/geist-variable.woff2",
+    "sha256": "9b6f5ff45b278c744b5f379a2c4ecbaf858a842b8eaf82ac8d21b699ca16c608",
+    "bytes": 29288
+  },
+  "palette": {
+    "background": "#09090b",
+    "foreground": "#fafafa",
+    "primary": "#f14704",
+    "border": "#ffffff1a",
+    "mutedForeground": "#9f9fa9"
+  },
+  "radius": "0.65rem"
+}

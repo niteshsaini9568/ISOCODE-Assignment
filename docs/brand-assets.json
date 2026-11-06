@@ -1,0 +1,79 @@
+{
+  "sourceFile": "ISOCODELABS \u2014 Software, crafted with perfection. (11_3_2026 7\uff1a41\uff1a30 PM).html",
+  "sourceUrl": "https://isocodelabs.com/",
+  "savedAt": "2026-11-03T19:41:30+05:30",
+  "assets": [
+    {
+      "file": "anton-400.woff2",
+      "source": "embedded @font-face",
+      "sha256": "23aab0b2692a0c89eb7997d3c7cf5bda41276d6cd4ab6cc0edc3edfcece32b09"
+    },
+    {
+      "file": "general-sans-400.woff2",
+      "source": "embedded @font-face",
+      "sha256": "3ec2be771caf168b077ca05af4df1dace77088e2b3a27da570036e61be58a039"
+    },
+    {
+      "file": "general-sans-500.woff2",
+      "source": "embedded @font-face",
+      "sha256": "c30377df1de8444d07161725c751f458beec07c28034df2fd275d1aa587a239f"
+    },
+    {
+      "file": "general-sans-600.woff2",
+      "source": "embedded @font-face",
+      "sha256": "94a2a0e1ef59728eb65498ed7fe26e5af7e2858a3a4a278a89ac1f83a0544945"
+    },
+    {
+      "file": "space-mono-400.woff2",
+      "source": "embedded @font-face",
+      "sha256": "e0c8e616bda27642f4c3cebaecff6525d901e73afc8a227cbbb0f2af4810f300"
+    },
+    {
+      "file": "sky.webp",
+      "source": "--sf-img-6",
+      "sha256": "7150e3a318b8f86b57e3e37ecce4d34275b49c09e9dd66bb18c013bafe8cff64"
+    },
+    {
+      "file": "flora.webp",
+      "source": "--sf-img-8",
+      "sha256": "235278542ad6b50bf37da71665026e83feccba5746e4d3b6c9342c07b004d5ca"
+    },
+    {
+      "file": "landscape.webp",
+      "source": "--sf-img-10",
+      "sha256": "efd3aa6473c6dc45853b7084ab6edefbc5b290dd937e1409399d2cc103b393bf"
+    },
+    {
+      "file": "scene-figures.webp",
+      "source": "--sf-img-12",
+      "sha256": "1649f86aec51f9fbae427dca9af895ad35371d6efef9edca4bb6b19a1f880489"
+    },
+    {
+      "file": "scene-foreground.webp",
+      "source": "--sf-img-14",
+      "sha256": "72522cb8f0261a0fb7fededc0f171f13afc8907168537335d2d7323c895ff178"
+    },
+    {
+      "file": "apple-icon.png",
+      "source": "ZIP or embedded monogram",
+      "sha256": "4116a896d7f6b0f5367094c26857706f3f4cb33978e953ab06fba55d4ec8e73a"
+    },
+    {
+      "file": "icon.png",
+      "source": "ZIP or embedded monogram",
+      "sha256": "fee3acc868d0200cdbef49fb2a5ffccc9fd9d479592e7ba1e4229dabccaffade"
+    },
+    {
+      "file": "monogram-hires.png",
+      "source": "ZIP or embedded monogram",
+      "sha256": "4e1a73717bb1031cf9b3ce79a5214b42590ceec0bcaed24f138058e18bfb6126"
+    },
+    {
+      "file": "monogram.avif",
+      "source": "ZIP or embedded monogram",
+      "sha256": "4a1e906d3959636e4619fa92540b4c80bad17638889b9cc6f1e463bbad5034bd"
+    }
+  ],
+  "sourceDirectory": "Desktop/CampusHire",
+  "additionalSource": "isocodelabs-com-UI.zip"
+}

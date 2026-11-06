@@ -1,0 +1,12 @@
+data/
+output/
+.env*
+.next/
+node_modules/
+dist/
+.agents/
+tests/
+docs/
+*.log
+*.zip
+*.html
