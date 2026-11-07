@@ -6,7 +6,7 @@ Local development without `DATABASE_URL` continues to use the existing SQLite da
 
 ## 1. Import the project
 
-Push the source to a private GitHub repository, then import it into Vercel. Do not commit `.env`, `.env.local`, credentials, candidate files, `data`, `.next` or `node_modules`.
+Keep the GitHub repository public during assignment review, then import it into Vercel. Do not commit `.env`, `.env.local`, infrastructure credentials, real candidate files, `data`, `.next` or `node_modules`.
 
 | Setting | Value |
 | --- | --- |
@@ -14,7 +14,7 @@ Push the source to a private GitHub repository, then import it into Vercel. Do n
 | Framework | Next.js |
 | Node.js | 24.x |
 | Install command | `npm ci` |
-| Build command | `npm run build` |
+| Build command | `npm run migrate:cloud && npm run check:cloud && npm run build` |
 | Output directory | Framework default |
 
 `vercel.json` and `next.config.mjs` include the deployment and Workflow SDK configuration. Do not configure `server/index.js` as the Vercel entry point. The legacy launcher is retained only for older local commands.

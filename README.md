@@ -2,6 +2,8 @@
 
 An independent hiring application for the Company A assignment. Next.js App Router frontend and Node.js/Express API. Vercel deployments use PostgreSQL, private Blob storage and durable Workflows; local development can use SQLite and private local CV files. No CampusHire services or accounts are required.
 
+**Live app:** https://isocode-pied.vercel.app · **Current verification:** [submission checks](docs/submission-verification.md) · **Small fictional test pack:** [download](https://isocode-pied.vercel.app/demo/shortlist-manual-test-kit.zip). Hosted reviewer credentials are supplied in the private submission's `deployment.md`, not this public repository. Live AI requires the reviewer's own provider key; preloaded sample scores are labeled demo rules.
+
 **Vercel deployment:** follow [docs/vercel-deployment.md](docs/vercel-deployment.md) for resource setup, environment variables, schema migration and verification. The app now runs with standard Next.js commands; Vercel does not need the legacy custom server.
 
 ## Run locally
@@ -9,9 +11,10 @@ An independent hiring application for the Company A assignment. Next.js App Rout
 Requires Node.js 24.x and npm.
 
 ```powershell
-cd "C:\Users\Om\Desktop\CampusHire\IsoCode Labs"
-npm install
-npm run dev
+git clone https://github.com/niteshsaini9568/ISOCODE-Assignment.git
+cd ISOCODE-Assignment
+npm.cmd ci
+npm.cmd run dev
 ```
 
 Open **http://127.0.0.1:5173**. The public home is at `/`, authentication at `/login` and `/signup`, and protected workspaces at `/dashboard`. Next.js refreshes frontend changes automatically. Restart the command after backend changes. The first development start seeds the demo database without overwriting existing data.

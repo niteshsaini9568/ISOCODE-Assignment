@@ -1,5 +1,7 @@
 # Vercel compatibility verification — 6 November 2026
 
+This is the historical local compatibility record. For the subsequent hosted deployment and final assessment checks, see [submission-verification.md](submission-verification.md).
+
 The application has been adapted for Vercel's standard Next.js deployment. Cloud operation uses PostgreSQL, private Blob uploads and durable Workflows. SQLite/local files remain available for local development. No Vercel project or paid cloud resource was created during this work.
 
 ## Implementation
