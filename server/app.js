@@ -568,7 +568,9 @@ export async function createApp({
     // Finish imports first so a queued copy cannot recreate an erased profile.
     if (await hasUpload(req.user.workspace_id)||activeUploads.get(req.user.workspace_id) || (await db.prepare("SELECT 1 FROM batch_items i JOIN batches b ON b.id=i.batch_id WHERE b.workspace_id=? AND i.status IN ('pending','processing') LIMIT 1").get(req.user.workspace_id))) fail(409, 'Wait for active CV imports to finish before deleting candidate data.');
     const items = await db.prepare('SELECT * FROM batch_items WHERE candidate_id=?').all(candidate.id);
-    for (const location of new Set([candidate.file_path, ...items.map(i => i.file_path)].filter(Boolean))) await fileStore.remove(location).catch(err => {
+    const locations=[candidate.file_path,...items.map(i=>i.file_path)];
+    if(serverless)locations.push(...(await db.prepare('SELECT pathname FROM upload_files WHERE id IN (SELECT id FROM batch_items WHERE candidate_id=?)').all(candidate.id)).map(file=>file.pathname));
+    for (const location of new Set(locations.filter(Boolean))) await fileStore.remove(location).catch(err => {
       if (err.code !== 'ENOENT') throw err;
     });
     await db.exec('BEGIN');

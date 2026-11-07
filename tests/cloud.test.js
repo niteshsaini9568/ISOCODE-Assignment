@@ -77,8 +77,13 @@ test('cloud: PostgreSQL transactions, private upload manifest, scoring, client r
   assert.equal((await request(`/applications/${id}/decision`,{cookie:manager.cookie,method:'POST',body:{action:'interview',interviewAt:new Date(Date.now()+86400000).toISOString()}})).status,200);
   assert.equal((await request('/weekly-review',{cookie,method:'POST',body:{notes:'Reviewed synthetic ranks and human choices.'}})).status,200);
   const candidateId=rows[0].candidateId;
+  const original=await db.prepare('SELECT batch_id FROM batch_items WHERE candidate_id=? LIMIT 1').get(candidateId),duplicateId=randomUUID(),duplicatePath=`private/duplicate-${duplicateId}.pdf`;
+  await db.prepare("INSERT INTO batch_items(id,batch_id,filename,status,candidate_id) VALUES(?,?,?,'duplicate',?)").run(duplicateId,original.batch_id,'duplicate.pdf',candidateId);
+  await db.prepare('INSERT INTO upload_files(id,session_id,filename,pathname,size,content_type) VALUES(?,?,?,?,?,?)').run(duplicateId,original.batch_id,'duplicate.pdf',duplicatePath,10,'application/pdf');
+  blobs.set(duplicatePath,{buffer:Buffer.from('duplicate'),contentType:'application/pdf'});
   assert.equal((await request(`/candidates/${candidateId}`,{cookie:other.cookie,method:'DELETE',body:{confirmation:candidateId}})).status,404);
   assert.equal((await request(`/candidates/${candidateId}`,{cookie,method:'DELETE',body:{confirmation:candidateId}})).status,200);
+  assert(!blobs.has(duplicatePath),'Deletion must erase duplicate Blob copies before removing their manifest records');
   assert.equal((await request(`/applications/${id}`,{cookie:manager.cookie})).status,404);
   assert.equal((await request('/privacy',{cookie})).data.candidates.length,2);
   assert.equal((await db.prepare('SELECT COUNT(*) n FROM weekly_reviews').get()).n,0);
