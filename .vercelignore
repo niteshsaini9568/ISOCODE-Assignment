@@ -9,4 +9,5 @@ tests/
 docs/
 *.log
 *.zip
+!public/demo/shortlist-manual-test-kit.zip
 *.html
