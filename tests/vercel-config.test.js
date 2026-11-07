@@ -23,3 +23,8 @@ test('hosted backend can import without the optional local SQLite module',()=>{
   const script=`import {registerHooks} from 'node:module';registerHooks({resolve(specifier,context,nextResolve){if(specifier==='node:sqlite')throw new Error('SQLite unavailable in this hosting runtime');return nextResolve(specifier,context);}});await import('./server/runtime.js');console.log('cloud-import-ok');`;
   assert.match(execFileSync(process.execPath,['--input-type=module','-e',script],{encoding:'utf8'}),/cloud-import-ok/);
 });
+
+test('PDF parsing dependencies cannot crash unrelated API startup',()=>{
+  const script=`import {registerHooks} from 'node:module';registerHooks({resolve(specifier,context,nextResolve){if(specifier==='pdf-parse')throw new Error('PDF renderer unavailable');return nextResolve(specifier,context);}});await import('./server/runtime.js');console.log('api-import-ok');`;
+  assert.match(execFileSync(process.execPath,['--input-type=module','-e',script],{encoding:'utf8'}),/api-import-ok/);
+});

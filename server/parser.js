@@ -1,5 +1,4 @@
 import { readFile } from 'node:fs/promises';
-import { PDFParse } from 'pdf-parse';
 import mammoth from 'mammoth';
 import { aiEnabled, generate, aiSelection, providers } from './ai.js';
 import { fail } from './domain.js';
@@ -9,6 +8,7 @@ export async function parseCv(filePath, filename, allowAi, selection=aiSelection
   let text = '';
   if (/\.pdf$/i.test(filename)) {
     if (buffer.subarray(0,5).toString() !== '%PDF-') fail(422,'File contents do not match PDF extension.');
+    const { PDFParse } = await import('pdf-parse');
     const parser = new PDFParse({ data: buffer });
     try { text = (await parser.getText({ pageJoiner: '\n' })).text; } finally { await parser.destroy(); }
     if (text.replace(/--\s*\d+\s*of\s*\d+\s*--/g,'').trim().length < 50) {
