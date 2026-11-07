@@ -1,5 +1,5 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import TeamSettings from './components/TeamSettings.jsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowDownUp, ArrowRight, ArrowUpRight, BriefcaseBusiness, CalendarDays, Check, CheckCheck, CheckCircle2, ChevronDown, ChevronRight, Clock3, Download, ExternalLink, Eye, FileCheck2, FileStack, FileText, Fingerprint, Info, LoaderCircle, LogOut, MapPin, Plus, Search, ShieldCheck, SlidersHorizontal, Sparkles, Menu, Trash2, Upload, Users, X } from 'lucide-react';
@@ -27,16 +27,17 @@ function SectionHeading({eyebrow,title,description,children}){return <div classN
 function ActionButton({children,busy,disabled,...props}){return <button className="button primary" disabled={busy||disabled} {...props}>{busy?<LoaderCircle size={16} className="spin"/>:null}{children}</button>;}
 
 export default function App({initialPage='overview',initialJob,initialCreate=false}){
-  const router=useRouter();
+  const router=useRouter(),pathname=usePathname(),query=useSearchParams();
+  const routePage=pathname.split('/')[2]||'overview',routeJob=query.get('job'),routeCreate=query.get('new')==='1';
   const [user,setUser]=useState(null),[ready,setReady]=useState(false),[config,setConfig]=useState({}),[jobs,setJobs]=useState([]),[selected,setSelected]=useState(initialJob||'REQ-2401'),[page,setPage]=useState(initialPage),[newJob,setNewJob]=useState(initialCreate),[toast,setToast]=useState(''),[error,setError]=useState(''),[revision,setRevision]=useState(0),[detail,setDetail]=useState(null),[loading,setLoading]=useState(false),[mobileOpen,setMobileOpen]=useState(false);
   useEffect(()=>{Promise.all([api('/config'),api('/auth/me').catch(()=>null)]).then(([c,u])=>{setConfig(c);setUser(u);if(!u)router.replace('/login');}).catch(e=>setError(e.message)).finally(()=>setReady(true));},[]);
-  useEffect(()=>{setPage(initialPage);setNewJob(initialCreate);if(initialJob)setSelected(initialJob);},[initialPage,initialCreate,initialJob]);
+  useEffect(()=>{setPage(routePage);setNewJob(routeCreate);if(routeJob)setSelected(routeJob);},[routePage,routeCreate,routeJob]);
   useEffect(()=>{window.scrollTo(0,0);},[page,user?.id]);
   const refresh=useCallback(()=>setRevision(r=>r+1),[]);
   useEffect(()=>{let live=true;if(user)collectPages(offset=>api(`/jobs?offset=${offset}`),25).then(rows=>{if(!live)return;setJobs(rows);setSelected(s=>rows.some(j=>j.id===s)?s:rows[0]?.id);}).catch(e=>{if(live)setError(e.message);});return()=>{live=false;};},[user,revision]);
   useEffect(()=>{if(!toast)return;const timer=setTimeout(()=>setToast(''),4500);return()=>clearTimeout(timer);},[toast]);
   const act=async(fn,message)=>{setError('');setLoading(true);try{await fn();if(message)setToast(message);refresh();return true;}catch(e){setError(e.message);return false;}finally{setLoading(false);}};
-  const navigate=(p,create=false,jobId=selected)=>{setPage(p);setNewJob(create);setError('');const query=new URLSearchParams({...jobId?{job:jobId}:{},...create?{new:'1'}:{}});router.push(`/dashboard/${p}${query.size?`?${query}`:''}`);};
+  const navigate=(p,create=false,jobId=selected)=>{setPage(p);setNewJob(create);setError('');const query=new URLSearchParams({...jobId?{job:jobId}:{},...create?{new:'1'}:{}});window.history.pushState(null,'',`/dashboard/${p}${query.size?`?${query}`:''}`);};
   const logout=()=>act(async()=>{await send('/auth/logout',{});setJobs([]);setDetail(null);window.location.assign('/login');},'Signed out');
   const job=jobs.find(j=>j.id===selected);
   if(!ready)return <div className="loading-screen"><LoaderCircle className="spin"/> Opening your workspace</div>;
@@ -45,7 +46,7 @@ export default function App({initialPage='overview',initialJob,initialCreate=fal
     <header className="topbar"><div className="row"><button className="nav-toggle" aria-label="Open navigation" aria-expanded={mobileOpen} aria-controls="workspace-navigation" onClick={()=>setMobileOpen(true)}><Menu size={19}/></button><div className="breadcrumb"><span>Workspace</span> <ChevronRight size={13}/><strong>{({overview:'Overview',scorecard:'JD scorecard',upload:'CV inbox',ranked:'Candidate ranking',pipeline:'Hiring pipeline',portal:'Client portal',governance:'Trust & review'})[page]}</strong></div></div><div className="row"><Link className="topbar-link" href="/">Home</Link><Link className="topbar-link" href="/#faq">Help</Link><span className="live-dot"/><span className="top-caption">{config.aiEnabled?`${config.ai?.name} · ${config.ai?.model}`:'Demo scoring'}</span><span className="divider"/><span className="top-caption">{user.workspace_name||'Your workspace'}</span><button className="mobile-logout" aria-label="Sign out" onClick={logout}><LogOut size={16}/></button><span className="top-avatar">{user.name.split(' ').map(s=>s[0]).join('')}</span></div></header>
     <main id="main-content" tabIndex={-1}>{error&&<div className="alert error" role="alert"><Info size={18}/><span>{error}</span><button aria-label="Dismiss error" onClick={()=>setError('')}><X size={17}/></button></div>}
       {page==='overview'?(user.role==='client'?<ClientOverview jobs={jobs} setSelected={setSelected} navigate={navigate}/>:<Overview jobs={jobs} setSelected={setSelected} navigate={navigate} config={config}/>):<>
-      {page!=='governance'&&!newJob&&<div className="job-context"><div><BriefcaseBusiness size={18}/><select aria-label="Active requisition" value={selected||''} onChange={e=>{setSelected(e.target.value);router.replace(`/dashboard/${page}?job=${encodeURIComponent(e.target.value)}`);}}>{jobs.map(j=><option key={j.id} value={j.id}>{j.title} · {j.id}</option>)}</select></div><span className="context-client">{job?.client_name}</span><Badge tone="green">Open requisition</Badge></div>}
+      {page!=='governance'&&!newJob&&<div className="job-context"><div><BriefcaseBusiness size={18}/><select aria-label="Active requisition" value={selected||''} onChange={e=>{setSelected(e.target.value);window.history.replaceState(null,'',`/dashboard/${page}?job=${encodeURIComponent(e.target.value)}`);}}>{jobs.map(j=><option key={j.id} value={j.id}>{j.title} · {j.id}</option>)}</select></div><span className="context-client">{job?.client_name}</span><Badge tone="green">Open requisition</Badge></div>}
       {page==='scorecard'&&<Scorecard key={`${selected}-${job?.version}-${newJob}`} job={newJob?null:job} onCreate={()=>navigate('scorecard',true)} act={act} loading={loading} onSaved={id=>{setSelected(id);refresh();navigate('ranked',false,id);}}/>}
       {page==='upload'&&job&&<UploadPage job={job} config={config} act={act} loading={loading} revision={revision} refresh={refresh} navigate={navigate}/>}
       {page==='ranked'&&job&&<Ranking job={job} revision={revision} act={act} config={config} onOpen={setDetail} navigate={navigate}/>}
