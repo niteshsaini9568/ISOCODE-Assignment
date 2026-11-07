@@ -39,8 +39,8 @@ input,select,textarea{background:var(--background);border-color:var(--input);col
 .nav-item.active{background:var(--sidebar-accent);box-shadow:none;color:var(--foreground)}
 .nav-item.active:before{display:none}
 .nav-label{font-size:14px;color:var(--muted-foreground)}
-.sidebar-note{background:var(--secondary);border-color:var(--border)}
-.sidebar-note strong,.sidebar-note p{font-size:14px;line-height:1.6}
+
+
 .topbar{height:64px;background:var(--background);border-color:var(--border);backdrop-filter:none;padding:0 26px}
 .topbar-link{color:var(--muted-foreground);font-size:14px;padding:5px}
 .topbar-link:hover{color:var(--foreground)}
