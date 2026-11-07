@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run migrate:cloud && npm run check:cloud && npm run build",
   "installCommand": "npm ci",
   "crons": [{ "path": "/api/cron/workflows", "schedule": "0 3 * * *" }]
 }

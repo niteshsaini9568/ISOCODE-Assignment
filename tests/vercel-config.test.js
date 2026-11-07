@@ -3,6 +3,12 @@ import assert from 'node:assert/strict';
 import { openPostgres } from '../server/postgres.js';
 import { getRuntime } from '../server/runtime.js';
 import { execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+
+test('Vercel applies and verifies the cloud schema before building',()=>{
+  const config=JSON.parse(readFileSync(new URL('../vercel.json',import.meta.url),'utf8'));
+  assert.equal(config.buildCommand,'npm run migrate:cloud && npm run check:cloud && npm run build');
+});
 
 test('Vercel refuses missing durable storage and rejects known transaction-pooler URLs',async()=>{
   const names=['VERCEL','DATABASE_URL','DATABASE_URL_UNPOOLED'],previous=Object.fromEntries(names.map(n=>[n,process.env[n]])),runtime=globalThis.__shortlistRuntime;
